@@ -1,9 +1,8 @@
-
-console.log("========from content_script.js");
+console.log("========from rainbow delimiters of content_script.js");
 console.log(jQuery().jquery);
-$('a').filter(function() {
-    return this.host !== location.host
-}).attr('target','_blank');
+// $('a').filter(function() {
+//   return this.host !== location.host
+// }).attr('target','_blank');
 
 
 var colors = [
@@ -13,61 +12,122 @@ var colors = [
   "IndianRed",
   "DarkOrchid",
   "SteelBlue",
-  "DeepPink2",
+  "#FF1493",
   "OliveDrab",
-  "dark red"
+  "darkred"
 ]
+
+function getRandomStr() {
+  return Math.floor(Math.random() * 1000000).toString();
+}
+function hex(x) {
+  return ("0" + parseInt(x).toString(16)).slice(-2);
+}
+function rgb2hex(str) {
+  rgb = str.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  if (rgb === null) {
+    return str;
+  } else {
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+  }
+}
+
+
 
 var colorized = [];
 $('blockquote').find("span.RktPn").each(function(i) {
+  var randomNum;
+  if (colorized.length === 0) {
+    randomNum = getRandomStr();
+  }
   if (this.textContent === "(") {
-    let c = colors[colorized.length];
-    let id = c.replace("#", "-").replace(" ", "-")
-    $(this).css("color", c);
-    $(this).attr('id', `color-${id}`);
-    colorized.push(c);
+    var color = colors[colorized.length];
+    var stripedColor = color.replace("#", "-").replace(" ", "-")
+    $(this).css("color", color);
+    this.classList.add(`rd-color-${stripedColor}`);
+    this.classList.add(`rd-id-${randomNum}`);
+    // $(this).attr('id', `color-${id}`);
+    colorized.push(color);
     // $(this).css("font-weight", "bolder");
   };
 
   if (this.textContent === ")") {
-    let c = colorized.pop()
-    let id = c.replace("#", "-").replace(" ", "-")
-    $(this).css("color", c);
-    $(this).attr('id', `color-${id}`);
-    // $(this).css("font-weight", "bolder");
+    var color = colorized.pop()
+    var stripedColor = color.replace("#", "-").replace(" ", "-")
+    $(this).css("color", color);
+    this.classList.add(`rd-color-${stripedColor}`);
+    this.classList.add(`rd-id-${randomNum}`);
+    // $(this).attr('id', `color-${id}`);
   };
 });
 
+
 var colorized = [];
 $('blockquote').find("span.RktPn").each(function(i) {
+  var randomNum;
+  if (colorized.length === 0) {
+    randomNum = getRandomStr();
+  }
   if (this.textContent === "[") {
-    let c = colors[colorized.length];
-    let id = c.replace("#", "-").replace(" ", "-")
-    $(this).css("color", c);
-    $(this).attr('id', `color-${id}`);
-    colorized.push(c);
+    var color = colors[colorized.length];
+    var stripedColor = color.replace("#", "-").replace(" ", "-")
+    $(this).css("color", color);
+    this.classList.add(`rd-color-${stripedColor}`);
+    this.classList.add(`rd-id-${randomNum}`);
+    // $(this).attr('id', `color-${id}`);
+    colorized.push(color);
     // $(this).css("font-weight", "bolder");
   };
 
   if (this.textContent === "]") {
-    let c = colorized.pop()
-    let id = c.replace("#", "-").replace(" ", "-")
-    $(this).css("color", c);
-    $(this).attr('id', `color-${id}`);
-    // $(this).css("font-weight", "bolder");
+    let color = colorized.pop()
+    let stripedColor = color.replace("#", "-").replace(" ", "-")
+    $(this).css("color", color);
+    this.classList.add(`rd-color-${stripedColor}`);
+    this.classList.add(`rd-id-${randomNum}`);
+    // $(this).attr('id', `color-${id}`);
   };
 });
 
 
 
+//////// mouse hover /////////////
 $("span.RktPn").mouseover(function(i) {
-  let color = this.style.color
-  $(`span#${this.id}`).css("background", color)
-  $(`span#${this.id}`).css("color", "white")
+  debugger;
+  var color = rgb2hex(this.style.color);
+  var matchingStr =  this.textContent
+
+
+  var elms = $(this).parents("blockquote").find(`span#${this.id}`).filter(function(ii) {
+    if (matchingStr === "(" || matchingStr === ")") {
+      if (this.textContent === "(" || this.textContent === ")") {
+        return true;
+      }
+    } else if (matchingStr === "[" || matchingStr === "]") {
+      if (this.textContent === "[" || this.textContent === "]") {
+        return true;
+      }}});
+  elms.css("background", "whitesmoke");  // gainsboro
+
+  // var matchedElms =
+
+  // elms.css("color", color);
+  // elms.css("background", "WhiteSmoke");
 });
 
+
 $("span.RktPn").mouseleave(function(i) {
-    let color = this.style.background
-  $(`span#${this.id}`).css("background", "transparent")
-  $(`span#${this.id}`).css("color", color)
+  var color = rgb2hex(this.style.color);
+  var matchingStr =  this.textContent
+  var elms = $(this).parents("blockquote").find(`span#${this.id}`).filter(function(ii) {
+    if (matchingStr === "(" || matchingStr === ")") {
+      if (this.textContent === "(" || this.textContent === ")") {
+        return true;
+      }
+    } else if (matchingStr === "[" || matchingStr === "]") {
+      if (this.textContent === "[" || this.textContent === "]") {
+        return true;
+      }}});
+  elms.css("color", color);
+  elms.css("background", "transparent");
 });
