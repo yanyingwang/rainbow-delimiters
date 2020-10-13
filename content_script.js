@@ -42,20 +42,32 @@ var colorized = [];
 $('blockquote').find("span.RktPn").each(function(i) {
   if (this.textContent === "[") {
     let c = colors[colorized.length];
+    let id = c.replace("#", "-").replace(" ", "-")
     $(this).css("color", c);
+    $(this).attr('id', `color-${id}`);
     colorized.push(c);
     // $(this).css("font-weight", "bolder");
   };
 
   if (this.textContent === "]") {
-    $(this).css("color", colorized.pop());
+    let c = colorized.pop()
+    let id = c.replace("#", "-").replace(" ", "-")
+    $(this).css("color", c);
+    $(this).attr('id', `color-${id}`);
     // $(this).css("font-weight", "bolder");
   };
 });
 
 
 
-// $("span.RktPn").mouseover(function(i) {
-//   console.log("=====detected!!!!");
-//   debugger;
-// });
+$("span.RktPn").mouseover(function(i) {
+  let color = this.style.color
+  $(`span#${this.id}`).css("background", color)
+  $(`span#${this.id}`).css("color", "white")
+});
+
+$("span.RktPn").mouseleave(function(i) {
+    let color = this.style.background
+  $(`span#${this.id}`).css("background", "transparent")
+  $(`span#${this.id}`).css("color", color)
+});
