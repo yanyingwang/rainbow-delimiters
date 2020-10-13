@@ -35,8 +35,8 @@ function rgb2hex(str) {
 
 
 var colorized = [];
+var randomNum;
 $('blockquote').find("span.RktPn").each(function(i) {
-  var randomNum;
   if (colorized.length === 0) {
     randomNum = getRandomStr();
   }
@@ -63,8 +63,8 @@ $('blockquote').find("span.RktPn").each(function(i) {
 
 
 var colorized = [];
+var randomNum;
 $('blockquote').find("span.RktPn").each(function(i) {
-  var randomNum;
   if (colorized.length === 0) {
     randomNum = getRandomStr();
   }
@@ -93,12 +93,12 @@ $('blockquote').find("span.RktPn").each(function(i) {
 
 //////// mouse hover /////////////
 $("span.RktPn").mouseover(function(i) {
-  debugger;
   var color = rgb2hex(this.style.color);
-  var matchingStr =  this.textContent
-
-
-  var elms = $(this).parents("blockquote").find(`span#${this.id}`).filter(function(ii) {
+  var matchingStr = this.textContent
+  var classNames = this.className.split(" ")
+  var rdColor = classNames[1];
+  var rdId = classNames[2];
+  var elms = $(this).parents("blockquote").find(`span.${rdColor}.${rdId}`).filter(function(ii) {
     if (matchingStr === "(" || matchingStr === ")") {
       if (this.textContent === "(" || this.textContent === ")") {
         return true;
@@ -107,12 +107,10 @@ $("span.RktPn").mouseover(function(i) {
       if (this.textContent === "[" || this.textContent === "]") {
         return true;
       }}});
-  elms.css("background", "whitesmoke");  // gainsboro
-
-  // var matchedElms =
-
-  // elms.css("color", color);
-  // elms.css("background", "WhiteSmoke");
+  // elms.css("background", "whitesmoke");  // gainsboro
+  elms.className = ["RktPn", rdColor, rdId ].join(" ");
+  elms.css("color", "white");
+  elms.css("background", color);
 });
 
 
