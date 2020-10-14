@@ -5,12 +5,29 @@ console.log(jQuery().jquery);
 // }).attr('target','_blank');
 
 
-var RDblock;
-if ($(".SCodeFlow").length !== 0) {
-  RDblock = ".SCodeFlow";
-} else if ($("blockquote").length !== 0) {
-  RDblock = "blockquote";
-}
+const RDBlocks = [ ".SCodeFlow", "blockquote", "table.highlight" ]
+var RDBlock = RDBlocks.find(function(e) { return $(e).length });
+// if ($(".SCodeFlow").length) {
+//   RDBlock = ".SCodeFlow";
+// } else if ($("blockquote").length) {
+//   RDBlock = "blockquote";
+// } if ($("table.highlight").length) {
+//   RDBlock = "table.highlight";
+// }
+
+$(RDBlock).find("td").each(function(i) {
+  if ($(this).find("span.RktPn").length) {
+    $(this).find("span.RktPn").each(function(ii) {
+      $(this).addClass("rd-bracket")
+    });
+  } else {
+    var str = this.outerHTML.replace("(", "<span class='rd-bracket'>(</span>").
+        replace(")", "<span class='rd-bracket'>)</span>").
+        replace("[", "<span class='rd-bracket'>[</span>").
+        replace("]", "<span class='rd-bracket'>]</span>")
+    this.outerHTML = str;
+  }
+})
 
 var colors = [
   "#458588",
@@ -42,7 +59,7 @@ function rgb2hex(str) {
 
 var colorized = [];
 var randomNum;
-$(RDblock).find("span.RktPn").each(function(i) {
+$(RDBlock).find("span.rd-bracket").each(function(i) {
   if (colorized.length === 0) {
     randomNum = getRandomStr();
   }
@@ -70,7 +87,7 @@ $(RDblock).find("span.RktPn").each(function(i) {
 
 var colorized = [];
 var randomNum;
-$(RDblock).find("span.RktPn").each(function(i) {
+$(RDBlock).find("span.rd-bracket").each(function(i) {
   if (colorized.length === 0) {
     randomNum = getRandomStr();
   }
@@ -99,7 +116,7 @@ $(RDblock).find("span.RktPn").each(function(i) {
 
 //////// mouse hover /////////////
 // function findRelatedElms(elm) {
-//   var elms = $(this).parents(RDblock).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
+//   var elms = $(this).parents(RDBlock).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
 //     if (matchingStr === "(" || matchingStr === ")") {
 //       if (this.textContent === "(" || this.textContent === ")") {
 //         return true;
@@ -111,13 +128,13 @@ $(RDblock).find("span.RktPn").each(function(i) {
 //   return elms;
 // }
 
-$("span.RktPn").mouseover(function(i) {
+$("span.rd-bracket").mouseover(function(i) {
   var color = rgb2hex(this.style.color);
   var matchingStr = this.textContent
   var classNames = this.className.split(" ")
   var rdColor = classNames[1];
   var rdId = classNames[2];
-  var elms = $(this).parents(RDblock).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
+  var elms = $(this).parents(RDBlock).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
     if (matchingStr === "(" || matchingStr === ")") {
       if (this.textContent === "(" || this.textContent === ")") {
         return true;
@@ -127,20 +144,20 @@ $("span.RktPn").mouseover(function(i) {
         return true;
       }}});
   // elms.css("background", "whitesmoke");  // gainsboro
-  elms.className = ["RktPn", rdColor, rdId ].join(" ");
+  elms.className = ["rd-bracket", rdColor, rdId ].join(" ");
 
   elms.css("color", "white");
   elms.css("background", color);
 });
 
 
-$("span.RktPn").mouseleave(function(i) {
+$("span.rd-bracket").mouseleave(function(i) {
   var color = rgb2hex(this.style.background);
   var matchingStr = this.textContent
   var classNames = this.className.split(" ")
   var rdColor = classNames[1];
   var rdId = classNames[2];
-  var elms = $(this).parents(RDblock).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
+  var elms = $(this).parents(RDBlock).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
     if (matchingStr === "(" || matchingStr === ")") {
       if (this.textContent === "(" || this.textContent === ")") {
         return true;
@@ -150,7 +167,7 @@ $("span.RktPn").mouseleave(function(i) {
         return true;
       }}});
   // elms.css("background", "whitesmoke");  // gainsboro
-  elms.className = ["RktPn", rdColor, rdId ].join(" ");
+  elms.className = ["rd-bracket", rdColor, rdId ].join(" ");
 
   elms.css("color", color);
   elms.css("background", "transparent");
