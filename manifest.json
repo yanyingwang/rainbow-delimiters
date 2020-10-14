@@ -26,7 +26,7 @@
     {
       "css": ["style.css"],
       "js": ["jquery.min.js", "content_script.js"],
-      "matches": ["https://docs.racket-lang.org/*", "file:///Applications/Racket%20v*/*"]
+      "matches": ["https://docs.racket-lang.org/*", "file:///Applications/Racket%20v*/*", "https://www.yanying.wang/*"]
     }
   ],
   "manifest_version": 2
