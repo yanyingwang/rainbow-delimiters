@@ -37,66 +37,58 @@ function rgb2hex(str) {
 }
 
 function colorizing(RDBlock) {
-  $(RDBlock).find("td").each(function(i) {
+  $(RDBlock).find("tr").each(function(i) {
+    if (this.classList.contains("rd-colorized")) { return false; }
+    $(this).addClass("rd-colorized");
+
     if ($(this).find("span.RktPn").length) {
       $(this).find("span.RktPn").each(function(ii) {
         $(this).addClass("rd-bracket")
       });
     } else {
-      var str = this.outerHTML.replace("(", "<span class='rd-bracket'>(</span>").
-          replace(")", "<span class='rd-bracket'>)</span>").
-          replace("[", "<span class='rd-bracket'>[</span>").
-          replace("]", "<span class='rd-bracket'>]</span>")
-      this.outerHTML = str;
+      this.innerHTML = this.innerHTML.replace(/\(|\)|\[|\]{|}/g, function(str) {
+        return `<span class='rd-bracket'>${str}</span>`;
+      });
     }
   })
 
   var colorized = [];
   var randomNum;
   $(RDBlock).find("span.rd-bracket").each(function(i) {
-    if (this.className.includes(" rd-id-")) {
-      return false;
-    }
-    if (colorized.length === 0) {
-      randomNum = getRandomStr();
-    }
+    if (this.className.includes(" rd-id-")) { return false; }
+    if (!colorized.length) { randomNum = getRandomStr(); }
+
     if (this.textContent === "(") {
-      var color = colors[colorized.length];
+      var color = colors[colorized.length] || "red";
       var stripedColor = color.replace("#", "-").replace(" ", "-")
       $(this).css("color", color);
       this.classList.add(`rd-color-${stripedColor}`);
       this.classList.add(`rd-id-${randomNum}`);
-      // $(this).attr('id', `color-${id}`);
       colorized.push(color);
       // $(this).css("font-weight", "bolder");
     };
 
     if (this.textContent === ")") {
-      var color = colorized.pop();
+      var color = colorized.pop() || "red";
       var stripedColor = color.replace("#", "-").replace(" ", "-");
       $(this).css("color", color);
       this.classList.add(`rd-color-${stripedColor}`);
       this.classList.add(`rd-id-${randomNum}`);
-      // $(this).attr('id', `color-${id}`);
     };
   });
 
   var colorized = [];
   var randomNum;
   $(RDBlock).find("span.rd-bracket").each(function(i) {
-    if (this.className.includes(" rd-id-")) {
-      return false;
-    }
-    if (colorized.length === 0) {
-      randomNum = getRandomStr();
-    }
+    if (this.className.includes(" rd-id-")) { return false; }
+    if (!colorized.length) { randomNum = getRandomStr(); }
+
     if (this.textContent === "[") {
       var color = colors[colorized.length];
       var stripedColor = color.replace("#", "-").replace(" ", "-")
       $(this).css("color", color);
       this.classList.add(`rd-color-${stripedColor}`);
       this.classList.add(`rd-id-${randomNum}`);
-      // $(this).attr('id', `color-${id}`);
       colorized.push(color);
       // $(this).css("font-weight", "bolder");
     };
@@ -107,13 +99,15 @@ function colorizing(RDBlock) {
       $(this).css("color", color);
       this.classList.add(`rd-color-${stripedColor}`);
       this.classList.add(`rd-id-${randomNum}`);
-      // $(this).attr('id', `color-${id}`);
     };
   });
 }
 
 
 /////// actions /////////
+function findCousinElms(elm) {
+}
+
 const RDBlocks = [ "blockquote", ".SCodeFlow", "table.highlight" ]
 RDBlocks.forEach(function(e) {
   if ($(e).length) { colorizing(e); }
@@ -121,12 +115,16 @@ RDBlocks.forEach(function(e) {
 
 $("span.rd-bracket").mouseover(function(i) {
   var color = rgb2hex(this.style.color);
+  if (!color.length) { return console.log(`mouseover on an unexpected rd-bracket element: ${this.outerHTML}`); }
+
   var matchingStr = this.textContent;
   var classNames = this.className.split(" ");
   var rdColor = classNames.find(function(e) { return e.startsWith("rd-color-") });
   var rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
-  var RDBlock = RDBlocks.find(function(e) { return $(this).parents(e).length });
-  var elms = $(this).parents(RDBlock).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
+
+  var elm = this;
+  var parentElm = elm.closest(RDBlocks.find(function(e) { return elm.closest(e); }));
+  var cousinElms = $(parentElm).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
     if (matchingStr === "(" || matchingStr === ")") {
       if (this.textContent === "(" || this.textContent === ")") {
         return true;
@@ -137,18 +135,22 @@ $("span.rd-bracket").mouseover(function(i) {
       }}});
   // elms.css("background", "whitesmoke");  // gainsboro
 
-  elms.css("color", "white");
-  elms.css("background", color);
+  cousinElms.css("color", "white");
+  cousinElms.css("background", color);
 });
 
 $("span.rd-bracket").mouseleave(function(i) {
   var color = rgb2hex(this.style.background);
+  if (!color.length) { return; }
   var matchingStr = this.textContent;
   var classNames = this.className.split(" ");
   var rdColor = classNames.find(function(e) { return e.startsWith("rd-color-") });
   var rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
   var RDBlock = RDBlocks.find(function(e) { return $(this).parents(e) })
-  var elms = $(this).parents(RDBlock).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
+
+  var elm = this;
+  var parentElm = elm.closest(RDBlocks.find(function(e) { return elm.closest(e); }));
+  var cousinElms = $(parentElm).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
     if (matchingStr === "(" || matchingStr === ")") {
       if (this.textContent === "(" || this.textContent === ")") {
         return true;
