@@ -25,8 +25,8 @@
   "content_scripts": [
     {
       // "css": ["style.css"],
-      "js": ["jquery.min.js", "content_script.js"],
-      "matches": ["https://docs.racket-lang.org/*", "file:///Applications/Racket%20v*/*", "https://www.yanying.wang/*", "https://github.com/*"]
+      "js": [ "jquery.min.js", "content_script.js" ],
+      "matches": [ "https://docs.racket-lang.org/*", "file:///Applications/Racket%20v*/*", "https://www.yanying.wang/*", "https://github.com/*", "https://gitlab.com/*", "https://stackoverflow.com/*" ]
     }
   ],
   "manifest_version": 2

@@ -103,12 +103,28 @@ function colorizing(RDBlock) {
   });
 }
 
-
-/////// actions /////////
+const RDBlocks = [ "blockquote", ".SCodeFlow", "table.highlight", "pre.code.highlight", "pre code" ]
 function findCousinElms(elm) {
+  var matchingStr = elm.textContent;
+  var classNames = elm.className.split(" ");
+  var rdColor = classNames.find(function(e) { return e.startsWith("rd-color-") });
+  var rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
+  var parentElm = elm.closest(RDBlocks.find(function(e) { return elm.closest(e); }));
+  var cousinElms = $(parentElm).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
+    if (matchingStr === "(" || matchingStr === ")") {
+      if (this.textContent === "(" || this.textContent === ")") {
+        return true;
+      }
+    } else if (matchingStr === "[" || matchingStr === "]") {
+      if (this.textContent === "[" || this.textContent === "]") {
+        return true;
+      }}});
+  return cousinElms;
 }
 
-const RDBlocks = [ "blockquote", ".SCodeFlow", "table.highlight" ]
+
+
+/////// actions /////////
 RDBlocks.forEach(function(e) {
   if ($(e).length) { colorizing(e); }
 });
@@ -116,51 +132,16 @@ RDBlocks.forEach(function(e) {
 $("span.rd-bracket").mouseover(function(i) {
   var color = rgb2hex(this.style.color);
   if (!color.length) { return console.log(`mouseover on an unexpected rd-bracket element: ${this.outerHTML}`); }
-
-  var matchingStr = this.textContent;
-  var classNames = this.className.split(" ");
-  var rdColor = classNames.find(function(e) { return e.startsWith("rd-color-") });
-  var rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
-
-  var elm = this;
-  var parentElm = elm.closest(RDBlocks.find(function(e) { return elm.closest(e); }));
-  var cousinElms = $(parentElm).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
-    if (matchingStr === "(" || matchingStr === ")") {
-      if (this.textContent === "(" || this.textContent === ")") {
-        return true;
-      }
-    } else if (matchingStr === "[" || matchingStr === "]") {
-      if (this.textContent === "[" || this.textContent === "]") {
-        return true;
-      }}});
-  // elms.css("background", "whitesmoke");  // gainsboro
-
+  cousinElms = findCousinElms(this);
   cousinElms.css("color", "white");
   cousinElms.css("background", color);
+  // cousinElms.css("background", "whitesmoke");  // gainsboro
 });
 
 $("span.rd-bracket").mouseleave(function(i) {
   var color = rgb2hex(this.style.background);
-  if (!color.length) { return; }
-  var matchingStr = this.textContent;
-  var classNames = this.className.split(" ");
-  var rdColor = classNames.find(function(e) { return e.startsWith("rd-color-") });
-  var rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
-  var RDBlock = RDBlocks.find(function(e) { return $(this).parents(e) })
-
-  var elm = this;
-  var parentElm = elm.closest(RDBlocks.find(function(e) { return elm.closest(e); }));
-  var cousinElms = $(parentElm).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
-    if (matchingStr === "(" || matchingStr === ")") {
-      if (this.textContent === "(" || this.textContent === ")") {
-        return true;
-      }
-    } else if (matchingStr === "[" || matchingStr === "]") {
-      if (this.textContent === "[" || this.textContent === "]") {
-        return true;
-      }}});
-  // elms.css("background", "whitesmoke");  // gainsboro
-
-  elms.css("color", color);
-  elms.css("background", "transparent");
+  if (!color.length) { return console.log(`mouseleave on an unexpected rd-bracket element: ${this.outerHTML}`); }
+  cousinElms = findCousinElms(this);
+  cousinElms.css("color", color);
+  cousinElms.css("background", "transparent");
 });
