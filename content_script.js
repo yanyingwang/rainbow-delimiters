@@ -22,7 +22,7 @@ const colors = [
 
 
 function getRandomStr() {
-  return Math.floor(Math.random() * 10000000000).toString();
+  return Math.floor(Math.random() * 10000).toString();
 }
 function hex(x) {
   return ("0" + parseInt(x).toString(16)).slice(-2);
@@ -58,7 +58,7 @@ function colorizing(RDBlock) {
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomNum}`);
       this.classList.add(`rd-depth-${recordDepth}`);
-      this.classList.add(`rd-color-${stripedColor}`);
+      this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
       // $(this).css("font-weight", "bolder");
     }
     if ([")", "]", "}"].includes(this.textContent)) {
@@ -69,7 +69,7 @@ function colorizing(RDBlock) {
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomNum}`);
       this.classList.add(`rd-depth-${recordDepth + 1}`);
-      this.classList.add(`rd-color-${stripedColor}`);
+      this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
     }
   });
 }
@@ -77,19 +77,31 @@ function colorizing(RDBlock) {
 const RDBlocks = [ "blockquote", ".SCodeFlow", "table.highlight", "pre.code.highlight", "pre code" ]
 function findCousinElms(elm) {
   var matchingStr = elm.textContent;
+  var matchingArr;
+  switch(matchingStr) {
+  case '(':
+  case ')':
+    matchingArr = ['(', ')'];
+    break;
+  case '[':
+  case ']':
+    matchingArr = ['[', ']'];
+    break;
+  case '{':
+  case '}':
+    matchingArr = ['{', '}'];
+    break;
+  }
+
   var classNames = elm.className.split(" ");
+  var rdDepth = classNames.find(function(e) { return e.startsWith("rd-depth-") });
+  var depthNum = rdDepth.split("-").pop();
   var rdColor = classNames.find(function(e) { return e.startsWith("rd-color-") });
   var rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
   var parentElm = elm.closest(RDBlocks.find(function(e) { return elm.closest(e); }));
-  var cousinElms = $(parentElm).find(`span.${rdColor}.${rdId}`).filter(function(ii) {
-    if (matchingStr === "(" || matchingStr === ")") {
-      if (this.textContent === "(" || this.textContent === ")") {
-        return true;
-      }
-    } else if (matchingStr === "[" || matchingStr === "]") {
-      if (this.textContent === "[" || this.textContent === "]") {
-        return true;
-      }}});
+  var cousinElms = $(parentElm).find(`span.${rdDepth}.${rdId}`).filter(function(ii) {
+    return matchingArr.includes(this.textContent);
+    });
   return cousinElms;
 }
 
@@ -116,3 +128,6 @@ $("span.rd-bracket").mouseleave(function(i) {
   cousinElms.css("color", color);
   cousinElms.css("background", "transparent");
 });
+
+
+
