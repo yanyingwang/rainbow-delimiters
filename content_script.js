@@ -16,7 +16,7 @@ const colors = [
   "#7e5e60",
   "#666699",
   "#4a646c",
-  "#5e644f",
+  "#5e644f"
 ]
 
 function getRandomStr() {
@@ -73,7 +73,12 @@ function colorizing(RDBlock) {
   });
 }
 
-const RDBlocks = [ "blockquote", ".SCodeFlow", "table.highlight", "pre.code.highlight", "pre code" ]
+const RDBlocks = [ "blockquote", // racket scribble doc
+                   ".SCodeFlow", // racket frog scribble post
+                   "table.highlight", // github viewing code files
+                   "table.d-block", // github code comment of issues
+                   "pre.code.highlight",
+                   "pre code" ]
 function findCousinElms(elm) {
   var matchingStr = elm.textContent;
   var matchingArr;
