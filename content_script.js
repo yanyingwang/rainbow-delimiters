@@ -51,23 +51,19 @@ function colorizing(RDBlock) {
     if (recordDepth == 0) { randomNum = getRandomStr(); }
     if (["(", "[", "{"].includes(this.textContent)) {
       var color = colors[recordDepth % colors.length];
-      recordDepth++;
-      var stripedColor = color.replace("#", "-").replace(" ", "-")
-
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomNum}`);
       this.classList.add(`rd-depth-${recordDepth}`);
       this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
+      recordDepth++;
       // $(this).css("font-weight", "bolder");
     }
     if ([")", "]", "}"].includes(this.textContent)) {
       recordDepth--;
       var color = colors[recordDepth % colors.length];
-      var stripedColor = color.replace("#", "-").replace(" ", "-");
-
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomNum}`);
-      this.classList.add(`rd-depth-${recordDepth + 1}`);
+      this.classList.add(`rd-depth-${recordDepth}`);
       this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
     }
   });
