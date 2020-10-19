@@ -25,3 +25,4 @@ this plugin will be automatically enabled for links of website below:
 2. racket-color renamed with racket-depth.
 3. test it to work with gitlab, stackoverflow.
 4. a way to be enabled for an unautomically enabled website.
+5. make bracket colors customized.
