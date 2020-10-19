@@ -14,3 +14,8 @@ github website:
 Open `chrome://extensions/` and enable the developer mode, and then, click to load the directory of this repo.
 
 
+# explaination
+this plugin will be automatically enabled for links of website below:
+1. `https://docs.racket-lang.org/*`
+2. `http://github.com/*`
+3. `file:///Applications/Racket v*/*`
