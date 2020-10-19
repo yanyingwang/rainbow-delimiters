@@ -1,6 +1,5 @@
-console.log("========from rainbow delimiters of content_script.js");
-console.log(jQuery().jquery);
-
+// console.log("========from rainbow delimiters of content_script.js");
+// console.log(jQuery().jquery);
 
 //// functions //////
 const colors = [
@@ -19,7 +18,6 @@ const colors = [
   "#4a646c",
   "#5e644f",
 ]
-
 
 function getRandomStr() {
   return Math.floor(Math.random() * 10000).toString();
@@ -107,28 +105,29 @@ function findCousinElms(elm) {
 }
 
 
-
 /////// actions /////////
-RDBlocks.forEach(function(e) {
-  if ($(e).length) { colorizing(e); }
-});
+handler = function main() {
+  RDBlocks.forEach(function(e) {
+    if ($(e).length) { colorizing(e); }
+  });
 
-$("span.rd-bracket").mouseover(function(i) {
-  var color = rgb2hex(this.style.color);
-  if (!color.length) { return console.log(`mouseover on an unexpected rd-bracket element: ${this.outerHTML}`); }
-  cousinElms = findCousinElms(this);
-  cousinElms.css("color", "white");
-  cousinElms.css("background", color);
-  // cousinElms.css("background", "whitesmoke");  // gainsboro
-});
+  $("span.rd-bracket").mouseover(function(i) {
+    var color = rgb2hex(this.style.color);
+    if (!color.length) { return console.log(`mouseover on an unexpected rd-bracket element: ${this.outerHTML}`); }
+    cousinElms = findCousinElms(this);
+    cousinElms.css("color", "white");
+    cousinElms.css("background", color);
+    // cousinElms.css("background", "whitesmoke");  // gainsboro
+  });
 
-$("span.rd-bracket").mouseleave(function(i) {
-  var color = rgb2hex(this.style.background);
-  if (!color.length) { return console.log(`mouseleave on an unexpected rd-bracket element: ${this.outerHTML}`); }
-  cousinElms = findCousinElms(this);
-  cousinElms.css("color", color);
-  cousinElms.css("background", "transparent");
-});
+  $("span.rd-bracket").mouseleave(function(i) {
+    var color = rgb2hex(this.style.background);
+    if (!color.length) { return console.log(`mouseleave on an unexpected rd-bracket element: ${this.outerHTML}`); }
+    cousinElms = findCousinElms(this);
+    cousinElms.css("color", color);
+    cousinElms.css("background", "transparent");
+  });
+}
 
-
-
+$( handler );
+$(document).on('pjax:end', handler); // this line is mainly for github.com/*
