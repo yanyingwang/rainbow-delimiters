@@ -1,4 +1,4 @@
-# rainbow-delimiters
+# Rainbow Delimiters
 a chrome plugin of rainbow-delimiters, colorizing the matched brackets of source code.
 
 
@@ -14,7 +14,7 @@ github website:
 Open `chrome://extensions/` and enable the developer mode, and then, click to load the directory of this repo.
 
 
-# explaination
+# Explaination
 this plugin will be automatically enabled for links of website below:
 1. `https://docs.racket-lang.org/*`
 2. `file:///Applications/Racket v*/*` (<= when you view racket doc with `raco doc` cmd.)
