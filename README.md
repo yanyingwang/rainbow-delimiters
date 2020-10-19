@@ -1,5 +1,5 @@
 # rainbow-delimiters
-a chrome plugin of rainbow-delimiters
+a chrome plugin of rainbow-delimiters, colorizing the matched brackets of source code.
 
 
 # Usage
