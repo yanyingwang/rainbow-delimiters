@@ -19,6 +19,16 @@ const colors = [
   "#5e644f"
 ]
 
+const RDBlocks = [
+  "blockquote", // racket scribble doc
+  ".SCodeFlow", // racket frog scribble post
+  ".highlight", // github (viewing code files, code comment of issues, readme of repo)
+  // "table.d-block", // github code comment of issues
+  // "pre.code.highlight",
+  // "pre code"
+]
+
+
 function getRandomStr() {
   return Math.floor(Math.random() * 10000).toString();
 }
@@ -35,7 +45,7 @@ function rgb2hex(str) {
 }
 
 function colorizing(RDBlock) {
-  $(RDBlock).find("tr").each(function(i) {
+  $(RDBlock).each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
     // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
     this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
@@ -69,12 +79,7 @@ function colorizing(RDBlock) {
   });
 }
 
-const RDBlocks = [ "blockquote", // racket scribble doc
-                   ".SCodeFlow", // racket frog scribble post
-                   "table.highlight", // github viewing code files
-                   "table.d-block", // github code comment of issues
-                   "pre.code.highlight",
-                   "pre code" ]
+
 function findCousinElms(elm) {
   var matchingStr = elm.textContent;
   var matchingArr;
