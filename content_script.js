@@ -39,6 +39,7 @@ function rgb2hex(str) {
 function colorizing(RDBlock) {
   $(RDBlock).find("tr").each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
+    // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
     this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
       return `<span class='rd-bracket'>${str}</span>`;
     });
