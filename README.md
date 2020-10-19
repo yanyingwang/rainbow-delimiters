@@ -17,5 +17,11 @@ Open `chrome://extensions/` and enable the developer mode, and then, click to lo
 # explaination
 this plugin will be automatically enabled for links of website below:
 1. `https://docs.racket-lang.org/*`
-2. `http://github.com/*`
-3. `file:///Applications/Racket v*/*`
+2. `file:///Applications/Racket v*/*` (<= when you view racket doc with `raco doc` cmd.)
+3. `http://github.com/*`
+
+# TODO
+1. () [] {} using the same depth loop.
+2. racket-color renamed with racket-depth.
+3. test it to work with gitlab, stackoverflow.
+4. a way to be enabled for an unautomically enabled website.
