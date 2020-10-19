@@ -18,8 +18,8 @@ const colors = [
   "#666699",
   "#4a646c",
   "#5e644f",
-  "black"
 ]
+
 
 function getRandomStr() {
   return Math.floor(Math.random() * 10000000000).toString();
@@ -39,67 +39,38 @@ function rgb2hex(str) {
 function colorizing(RDBlock) {
   $(RDBlock).find("tr").each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
+    this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
+      return `<span class='rd-bracket'>${str}</span>`;
+    });
     $(this).addClass("rd-colorized");
-
-    if ($(this).find("span.RktPn").length) {
-      $(this).find("span.RktPn").each(function(ii) {
-        $(this).addClass("rd-bracket")
-      });
-    } else {
-      this.innerHTML = this.innerHTML.replace(/\(|\)|\[|\]{|}/g, function(str) {
-        return `<span class='rd-bracket'>${str}</span>`;
-      });
-    }
   })
 
-  var colorized = [];
+  var recordDepth = 0;
   var randomNum;
   $(RDBlock).find("span.rd-bracket").each(function(i) {
-    if (this.className.includes(" rd-id-")) { return false; }
-    if (!colorized.length) { randomNum = getRandomStr(); }
-
-    if (this.textContent === "(") {
-      var color = colors[colorized.length] || "red";
+    if (this.className.includes("rd-id-")) { return false; }
+    if (recordDepth == 0) { randomNum = getRandomStr(); }
+    if (["(", "[", "{"].includes(this.textContent)) {
+      var color = colors[recordDepth % colors.length];
+      recordDepth++;
       var stripedColor = color.replace("#", "-").replace(" ", "-")
-      $(this).css("color", color);
-      this.classList.add(`rd-color-${stripedColor}`);
-      this.classList.add(`rd-id-${randomNum}`);
-      colorized.push(color);
-      // $(this).css("font-weight", "bolder");
-    };
 
-    if (this.textContent === ")") {
-      var color = colorized.pop() || "red";
+      $(this).css("color", color);
+      this.classList.add(`rd-id-${randomNum}`);
+      this.classList.add(`rd-depth-${recordDepth}`);
+      this.classList.add(`rd-color-${stripedColor}`);
+      // $(this).css("font-weight", "bolder");
+    }
+    if ([")", "]", "}"].includes(this.textContent)) {
+      recordDepth--;
+      var color = colors[recordDepth % colors.length];
       var stripedColor = color.replace("#", "-").replace(" ", "-");
-      $(this).css("color", color);
-      this.classList.add(`rd-color-${stripedColor}`);
-      this.classList.add(`rd-id-${randomNum}`);
-    };
-  });
 
-  var colorized = [];
-  var randomNum;
-  $(RDBlock).find("span.rd-bracket").each(function(i) {
-    if (this.className.includes(" rd-id-")) { return false; }
-    if (!colorized.length) { randomNum = getRandomStr(); }
-
-    if (this.textContent === "[") {
-      var color = colors[colorized.length];
-      var stripedColor = color.replace("#", "-").replace(" ", "-")
       $(this).css("color", color);
-      this.classList.add(`rd-color-${stripedColor}`);
       this.classList.add(`rd-id-${randomNum}`);
-      colorized.push(color);
-      // $(this).css("font-weight", "bolder");
-    };
-
-    if (this.textContent === "]") {
-      let color = colorized.pop()
-      let stripedColor = color.replace("#", "-").replace(" ", "-")
-      $(this).css("color", color);
+      this.classList.add(`rd-depth-${recordDepth + 1}`);
       this.classList.add(`rd-color-${stripedColor}`);
-      this.classList.add(`rd-id-${randomNum}`);
-    };
+    }
   });
 }
 
