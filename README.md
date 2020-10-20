@@ -23,6 +23,7 @@ this plugin will be automatically enabled for links of website below:
 # TODO
 - [x] 1. () [] {} using the same depth loop.
 - [x] 2. racket-color renamed with racket-depth.
-- [ ] 3. test it to work with gitlab, stackoverflow.
+- [x] 3. test it to work with gitlab, stackoverflow.
 - [ ] 4. a way to be enabled for an unautomically enabled website.
 - [ ] 5. make bracket colors customized.
+- [ ] 6. only highlight matched bracket of current hovered bracket instead of showing all the same level depth brackets.

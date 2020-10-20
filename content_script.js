@@ -1,5 +1,5 @@
-// console.log("========from rainbow delimiters of content_script.js");
-// console.log(jQuery().jquery);
+console.log("========loading from rainbow delimiters of content_script.js");
+console.log(jQuery().jquery);
 
 //// functions //////
 const colors = [
@@ -20,9 +20,10 @@ const colors = [
 ]
 
 const RDBlocks = [
-  "blockquote", // racket scribble doc
-  ".SCodeFlow", // racket frog scribble post
+  // "blockquote", // racket scribble doc
+  ".SCodeFlow", // racket scribble doc / frog scribble post
   ".highlight", // github (viewing code files, code comment of issues, readme of repo)
+  "code" // gitlab stackoverflow
   // "table.d-block", // github code comment of issues
   // "pre.code.highlight",
   // "pre code"
@@ -47,7 +48,9 @@ function rgb2hex(str) {
 function colorizing(RDBlock) {
   $(RDBlock).each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
+    if ($(this).find("span.rd-bracket").length) { return false; }
     // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
+
     this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
       return `<span class='rd-bracket'>${str}</span>`;
     });
@@ -135,5 +138,6 @@ handler = function main() {
   });
 }
 
-$( handler );
+$(document).ready(function() { $( handler ); });
+// $( handler );
 $(document).on('pjax:end', handler); // this line is mainly for github.com/*
