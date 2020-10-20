@@ -1,4 +1,4 @@
-console.log("========loading from rainbow delimiters of content_script.js");
+console.log("========loading Rainbow Delimiters from content_script.js");
 console.log(jQuery().jquery);
 
 //// functions //////
@@ -49,7 +49,7 @@ function colorizing(RDBlock) {
   $(RDBlock).each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
     if ($(this).find("span.rd-bracket").length) { return false; }
-    // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
+    if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
 
     this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
       return `<span class='rd-bracket'>${str}</span>`;
@@ -138,6 +138,6 @@ handler = function main() {
   });
 }
 
-$(document).ready(function() { $( handler ); });
 // $( handler );
+$(document).ready(function() { $( handler ); }); // not working for a vuejs website
 $(document).on('pjax:end', handler); // this line is mainly for github.com/*
