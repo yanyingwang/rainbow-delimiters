@@ -29,6 +29,7 @@
       "matches": [ "https://docs.racket-lang.org/*",
                    "file:///Applications/Racket%20v*/*",
                    "file:///Users/*/*/doc/*",
+                   // "file:///Users/*/Library/Racket/*/pkgs/*",
                    "https://www.yanying.wang/*",
                    "https://github.com/*",
                    "https://gitlab.com/*",

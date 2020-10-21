@@ -21,7 +21,8 @@ const colors = [
 
 const RDBlocks = [
   // "blockquote", // racket scribble doc
-  ".SCodeFlow", // racket scribble doc / frog scribble post
+  // ".SCodeFlow", // racket scribble doc / frog scribble post
+  "table tbody tr",
   ".highlight", // github (viewing code files, code comment of issues, readme of repo)
   "code" // gitlab stackoverflow
   // "table.d-block", // github code comment of issues
@@ -49,7 +50,7 @@ function colorizing(RDBlock) {
   $(RDBlock).each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
     if ($(this).find("span.rd-bracket").length) { return false; }
-    if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
+    // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
 
     this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
       return `<span class='rd-bracket'>${str}</span>`;
@@ -82,7 +83,6 @@ function colorizing(RDBlock) {
   });
 }
 
-
 function findCousinElms(elm) {
   var matchingStr = elm.textContent;
   var matchingArr;
@@ -104,9 +104,8 @@ function findCousinElms(elm) {
   var classNames = elm.className.split(" ");
   var rdDepth = classNames.find(function(e) { return e.startsWith("rd-depth-") });
   var depthNum = rdDepth.split("-").pop();
-  var rdColor = classNames.find(function(e) { return e.startsWith("rd-color-") });
   var rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
-  var parentElm = elm.closest(RDBlocks.find(function(e) { return elm.closest(e); }));
+  var parentElm = elm.closest(".rd-colorized").parentElement;
   var cousinElms = $(parentElm).find(`span.${rdDepth}.${rdId}`).filter(function(ii) {
     return matchingArr.includes(this.textContent);
     });
@@ -130,7 +129,7 @@ handler = function main() {
   });
 
   $("span.rd-bracket").mouseleave(function(i) {
-    var color = rgb2hex(this.style.background);
+    var color = rgb2hex(this.style.backgroundColor);
     if (!color.length) { return console.log(`mouseleave on an unexpected rd-bracket element: ${this.outerHTML}`); }
     cousinElms = findCousinElms(this);
     cousinElms.css("color", color);
