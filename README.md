@@ -34,3 +34,4 @@ this plugin will be automatically enabled for links of website below:
 
 # build for publish browser plugins
 zip -r -FS ../rainbow-delimiters.zip * --exclude '*.git*' '.*' '*__MACOSX/*' 'images-back*'  'LICENSE' 'screenshot/*' '*.DS_Store'
+tar -czvf rainbow-delimiters.tar.gz rainbow-delimiters
