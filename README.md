@@ -1,5 +1,5 @@
 # Rainbow Delimiters
-A chrome plugin to colorize the matched brackets of source code.
+A web browser plugin to colorize the matched brackets of source code.
 
 
 # Usage
@@ -11,7 +11,8 @@ github website:
 
 
 # How to load
-Open `chrome://extensions/` and enable the developer mode, and then, click to load the directory of this repo.
+1. Chorme: Open `chrome://extensions/` and enable the developer mode, and then, click to load the directory of this repo.
+2. Firefix: search the `rainbow delimiters` and install it through the add-ons page of firefox.
 
 
 # Explaination
@@ -27,3 +28,9 @@ this plugin will be automatically enabled for links of website below:
 - [ ] 4. a way to be enabled for an unautomically enabled website.
 - [ ] 5. make bracket colors customized.
 - [ ] 6. only highlight matched bracket of current hovered bracket instead of showing all the same level depth brackets.
+
+
+
+
+# build for publish browser plugins
+zip -r -FS ../rainbow-delimiters.zip * --exclude '*.git*' '.*' '*__MACOSX/*' 'images-back*'  'LICENSE' 'screenshot/*' '*.DS_Store'
