@@ -1,7 +1,7 @@
 {
   "name": "Rainbow Delimiters",
   "version": "1.1",
-  "description": "Rainbow Delimiters",
+  "description": "A web browser plugin to colorize the matched brackets of source code on HTML pages",
   // "permissions": ["declarativeContent", "storage"],
   // "background": {
   //   "scripts": ["background.js"],
@@ -29,8 +29,6 @@
       "matches": [ "https://docs.racket-lang.org/*",
                    "file:///Applications/Racket%20v*/*",
                    "file:///Users/*/*/doc/*",
-                   // "file:///Users/*/Library/Racket/*/pkgs/*",
-                   "https://www.yanying.wang/*",
                    "https://github.com/*",
                    "https://gitlab.com/*",
                    "https://stackoverflow.com/*" ]
