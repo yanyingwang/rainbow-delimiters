@@ -1,18 +1,15 @@
 # Rainbow Delimiters
-A web browser plugin to colorize the matched brackets of source code.
+A web browser plugin to colorize the matched brackets of source code, it is especially useful for viewing a LISP family dialect source code from you browser.
+
+
+# Install
+1. Chorme: Open `chrome://extensions/` and enable the developer mode, and then, click to load the directory of this repo.
+2. Firefix: search the `Rainbow Delimiters` and install it through the add-ons page of Firefox. Or you can directly click [this link](https://addons.mozilla.org/zh-CN/firefox/addon/rainbow-delimiters) to install it.
 
 
 # Usage
-racket website:
-![racket](https://raw.githubusercontent.com/yanyingwang/rainbow-delimiters/main/screenshot/docs-racket-lang-org.gif)
-
 github website:
 ![github](https://raw.githubusercontent.com/yanyingwang/rainbow-delimiters/main/screenshot/github-com.gif)
-
-
-# How to load
-1. Chorme: Open `chrome://extensions/` and enable the developer mode, and then, click to load the directory of this repo.
-2. Firefix: search the `rainbow delimiters` and install it through the add-ons page of firefox.
 
 
 # Explaination
@@ -20,6 +17,8 @@ this plugin will be automatically enabled for links of website below:
 1. `https://docs.racket-lang.org/*`
 2. `file:///Applications/Racket v*/*` (<= when you view racket doc with `raco doc` cmd.)
 3. `http://github.com/*`
+4. `https://stackoverflow.com/*`
+
 
 # TODO
 - [x] 1. () [] {} using the same depth loop.
@@ -30,8 +29,8 @@ this plugin will be automatically enabled for links of website below:
 - [ ] 6. only highlight matched bracket of current hovered bracket instead of showing all the same level depth brackets.
 
 
-
-
-# build for publish browser plugins
+# dev build for publishing to a browser plugin
+~~~shell
 zip -r -FS ../rainbow-delimiters.zip * --exclude '*.git*' '.*' '*__MACOSX/*' 'images-back*'  'LICENSE' 'screenshot/*' '*.DS_Store'
 tar -czvf rainbow-delimiters.tar.gz rainbow-delimiters
+~~~
