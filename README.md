@@ -1,5 +1,9 @@
 # Rainbow Delimiters
-A web browser plugin to colorize the matched brackets of source code, it is especially useful for viewing a LISP family dialect source code from you browser.
+A web browser plugin to colorize the matched brackets of source code in HTML pages.
+
+This add-on could be very useful when you are let's say doing a code review through github.com and checking a piece of source code of someone's answer from stackoverflow.com.
+
+And it will be especially useful for a LISP family dialect source code.
 
 
 # Install
@@ -7,13 +11,12 @@ A web browser plugin to colorize the matched brackets of source code, it is espe
 2. Firefix: search the `Rainbow Delimiters` and install it through the add-ons page of Firefox. Or you can directly click [this link](https://addons.mozilla.org/zh-CN/firefox/addon/rainbow-delimiters) to install it.
 
 
-# Usage
-github website:
-![github](https://raw.githubusercontent.com/yanyingwang/rainbow-delimiters/main/screenshot/github-com.gif)
+# appearance when this plugin was administered:
+![github-com-racket-lang](https://raw.githubusercontent.com/yanyingwang/rainbow-delimiters/main/screenshot/github-com.gif)
 
 
 # Explaination
-this plugin will be automatically enabled for links of website below:
+Currently, this plugin will only be automatically enabled for links of website below:
 1. `https://docs.racket-lang.org/*`
 2. `file:///Applications/Racket v*/*` (<= when you view racket doc with `raco doc` cmd.)
 3. `http://github.com/*`
