@@ -13,7 +13,7 @@ This add-on could also be very useful as well as no matter when you are go throu
 
 
 # Explaination
-Currently, this plugin will only be automatically enabled for links of website below:
+Currently, this plugin will only be automatically enabled for links of websites below:
 1. `https://docs.racket-lang.org/*`
 2. `file:///Applications/Racket v*/*` (<= when you view racket doc with `raco doc` cmd.)
 3. `http://github.com/*`
