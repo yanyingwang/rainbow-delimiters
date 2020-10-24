@@ -5,7 +5,7 @@ This add-on could also be very useful as well as no matter when you are going th
 
 # Install
 1. Chorme: Open `chrome://extensions/` and enable the developer mode, and then, click to load the directory of this repo.
-2. Firefox: Click [this link](https://addons.mozilla.org/zh-CN/firefox/addon/rainbow-delimiters) and install it.
+2. Firefox: Directly click [this link](https://addons.mozilla.org/zh-CN/firefox/addon/rainbow-delimiters) and install it.
 
 
 # appearance when this plugin was administered:
