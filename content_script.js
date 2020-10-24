@@ -88,7 +88,7 @@ function colorizing(RDBlock) {
   });
 }
 
-function findCousinElms(elm) {
+function findClosestElms(elm) {
   var matchingStr = elm.textContent;
   var matchingArr;
   switch(matchingStr) {
@@ -110,13 +110,16 @@ function findCousinElms(elm) {
   var rdDepth = classNames.find(function(e) { return e.startsWith("rd-depth-") });
   var depthNum = rdDepth.split("-").pop();
   var rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
+  var rdIdd = classNames.find(function(e) { return e.startsWith("rd-idd-") });
   var parentElm = elm.closest(".rd-colorized").parentElement;
-  var cousinElms = $(parentElm).find(`span.${rdDepth}.${rdId}`).filter(function(ii) {
+  var cousinElms = $(parentElm).find(`span.${rdDepth}.${rdId}`).not(`span.${rdIdd}`).filter(function(ii) {
     return matchingArr.includes(this.textContent);
-    });
-  return cousinElms;
+  });
+  var brotherElms = $(parentElm).find(`span.${rdDepth}.${rdId}.${rdIdd}`).filter(function(ii) {
+    return matchingArr.includes(this.textContent);
+  });
+  return [ brotherElms, cousinElms ];
 }
-
 
 /////// actions /////////
 handler = function main() {
@@ -129,18 +132,19 @@ handler = function main() {
     var color = rgb2hex(this.style.color);
     if (color == "white") { return false };
     if (!color.length) { return console.log(`mouseover on an unexpected rd-bracket element: ${this.outerHTML}`); }
-    cousinElms = findCousinElms(this);
-    cousinElms.css("color", "white");
-    cousinElms.css("background", color);
-    // cousinElms.css("background", "whitesmoke");  // gainsboro
+    [ brotherElms, cousinElms ] = findClosestElms(this);
+    brotherElms.css("color", "white");
+    brotherElms.css("background", color);
+    cousinElms.css("background", "gainsboro");  // whitesmoke 
   });
 
   $("span.rd-bracket").mouseleave(function(i) {
     var color = rgb2hex(this.style.backgroundColor);
     if (color == "transparent") { return false };
     if (!color.length) { return console.log(`mouseleave on an unexpected rd-bracket element: ${this.outerHTML}`); }
-    cousinElms = findCousinElms(this);
-    cousinElms.css("color", color);
+    [ brotherElms, cousinElms ] = findClosestElms(this);
+    brotherElms.css("color", color);
+    brotherElms.css("background", "transparent");
     cousinElms.css("background", "transparent");
   });
 }
