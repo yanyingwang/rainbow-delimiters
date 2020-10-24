@@ -60,13 +60,16 @@ function colorizing(RDBlock) {
 
   var recordDepth = 0;
   var randomNum;
+  var randomNumArr = [];
   $(RDBlock).find("span.rd-bracket").each(function(i) {
     if (this.className.includes("rd-id-")) { return false; }
-    if (recordDepth == 0) { randomNum = getRandomStr(); }
+    // if (recordDepth == 0) { randomNum = getRandomStr(); }
     if (["(", "[", "{"].includes(this.textContent)) {
       var color = colors[recordDepth % colors.length];
+      var id = getRandomStr()
+      randomNumArr.push(id);
       $(this).css("color", color);
-      this.classList.add(`rd-id-${randomNum}`);
+      this.classList.add(`rd-id-${id}`);
       this.classList.add(`rd-depth-${recordDepth}`);
       // this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
       recordDepth++;
@@ -75,8 +78,9 @@ function colorizing(RDBlock) {
     if ([")", "]", "}"].includes(this.textContent)) {
       recordDepth--;
       var color = colors[recordDepth % colors.length];
+      var id = randomNumArr.pop();
       $(this).css("color", color);
-      this.classList.add(`rd-id-${randomNum}`);
+      this.classList.add(`rd-id-${id}`);
       this.classList.add(`rd-depth-${recordDepth}`);
       // this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
     }

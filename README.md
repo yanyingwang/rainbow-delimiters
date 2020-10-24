@@ -27,6 +27,7 @@ Currently, this plugin will only be automatically enabled for links of websites 
 - [ ] 4. a way to be enabled for an unautomically enabled website.
 - [ ] 5. make bracket colors customized.
 - [ ] 6. only highlight matched bracket of current hovered bracket instead of showing all the same level depth brackets.
+- [ ] 7. support https://*.wikipedia.org/** pre div
 
 
 # dev build for publishing to a browser plugin
