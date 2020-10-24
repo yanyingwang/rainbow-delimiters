@@ -59,30 +59,31 @@ function colorizing(RDBlock) {
   })
 
   var recordDepth = 0;
-  var randomNum;
-  var randomNumArr = [];
+  var randomId;
+  var randomIdds = [];
   $(RDBlock).find("span.rd-bracket").each(function(i) {
     if (this.className.includes("rd-id-")) { return false; }
-    // if (recordDepth == 0) { randomNum = getRandomStr(); }
+    if (recordDepth == 0) { randomId = getRandomStr(); }
     if (["(", "[", "{"].includes(this.textContent)) {
       var color = colors[recordDepth % colors.length];
-      var id = getRandomStr()
-      randomNumArr.push(id);
+      var idd = getRandomStr(); randomIdds.push(idd);
       $(this).css("color", color);
-      this.classList.add(`rd-id-${id}`);
+      this.classList.add(`rd-id-${randomId}`);
+      this.classList.add(`rd-idd-${idd}`);
       this.classList.add(`rd-depth-${recordDepth}`);
-      // this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
+      // this.title = `rd-bk-id/depth:  ${randomId}/${recordDepth}`
       recordDepth++;
       // $(this).css("font-weight", "bolder");
     }
     if ([")", "]", "}"].includes(this.textContent)) {
       recordDepth--;
       var color = colors[recordDepth % colors.length];
-      var id = randomNumArr.pop();
+      var idd = randomIdds.pop();
       $(this).css("color", color);
-      this.classList.add(`rd-id-${id}`);
+      this.classList.add(`rd-id-${randomId}`);
+      this.classList.add(`rd-idd-${idd}`);
       this.classList.add(`rd-depth-${recordDepth}`);
-      // this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
+      // this.title = `rd-bk-id/depth:  ${randomId}/${recordDepth}`
     }
   });
 }
@@ -124,6 +125,7 @@ handler = function main() {
   });
 
   $("span.rd-bracket").mouseover(function(i) {
+    console.log(this.classList);
     var color = rgb2hex(this.style.color);
     if (color == "white") { return false };
     if (!color.length) { return console.log(`mouseover on an unexpected rd-bracket element: ${this.outerHTML}`); }
