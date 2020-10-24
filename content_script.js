@@ -68,7 +68,7 @@ function colorizing(RDBlock) {
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomNum}`);
       this.classList.add(`rd-depth-${recordDepth}`);
-      this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
+      // this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
       recordDepth++;
       // $(this).css("font-weight", "bolder");
     }
@@ -78,7 +78,7 @@ function colorizing(RDBlock) {
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomNum}`);
       this.classList.add(`rd-depth-${recordDepth}`);
-      this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
+      // this.title = `rd-bk-id/depth:  ${randomNum}/${recordDepth}`
     }
   });
 }
@@ -121,6 +121,7 @@ handler = function main() {
 
   $("span.rd-bracket").mouseover(function(i) {
     var color = rgb2hex(this.style.color);
+    if (color == "white") { return false };
     if (!color.length) { return console.log(`mouseover on an unexpected rd-bracket element: ${this.outerHTML}`); }
     cousinElms = findCousinElms(this);
     cousinElms.css("color", "white");
@@ -130,6 +131,7 @@ handler = function main() {
 
   $("span.rd-bracket").mouseleave(function(i) {
     var color = rgb2hex(this.style.backgroundColor);
+    if (color == "transparent") { return false };
     if (!color.length) { return console.log(`mouseleave on an unexpected rd-bracket element: ${this.outerHTML}`); }
     cousinElms = findCousinElms(this);
     cousinElms.css("color", color);
