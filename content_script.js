@@ -3,15 +3,34 @@ console.log(jQuery().jquery);
 
 //// functions //////
 const colors = [
-  "#458588",
   "#b16286",
+  "#458588",
   "DarkSeaGreen",
   "IndianRed",
   "DarkOrchid",
-  "SteelBlue",
+
   "#FF1493",
+  "SteelBlue",
   "OliveDrab",
   "darkred",
+
+  "#4c516d",
+  "#7e5e60",
+  "#666699",
+  "#4a646c",
+  "#5e644f",
+
+  "#b16286",
+  "#458588",
+  "DarkSeaGreen",
+  "IndianRed",
+  "DarkOrchid",
+
+  "#FF1493",
+  "SteelBlue",
+  "OliveDrab",
+  "darkred",
+
   "#4c516d",
   "#7e5e60",
   "#666699",
@@ -135,7 +154,7 @@ handler = function main() {
     [ brotherElms, cousinElms ] = findClosestElms(this);
     brotherElms.css("color", "white");
     brotherElms.css("background", color);
-    cousinElms.css("background", "gainsboro");  // whitesmoke 
+    cousinElms.css("background", "gainsboro");  // whitesmoke
   });
 
   $("span.rd-bracket").mouseleave(function(i) {
