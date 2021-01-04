@@ -28,10 +28,10 @@ console.log(jQuery().jquery);
 // ]
 const colors = [
   "DarkRed",
+  "#b16286",
   "IndianRed",
   "DarkSalmon",
-  "LightSalmon",
-  "#FF1493"
+  "LightSalmon"
 ]
 
 
@@ -94,9 +94,9 @@ function colorizing(RDBlock) {
     if (["(", "[", "{"].includes(this.textContent)) {
       let color;
       if ($(this).parent()[0].className === "RktVal") {
-        color = "green";
+        color = "#228b22";
       } else if ($(this).parent()[0].className === "RktRes") {
-        color = "blue";
+        color = "#0000af";
       } else if ($(this).parent()[0].className === "RktErr") {
         color = "red";
       } else {
@@ -118,9 +118,9 @@ function colorizing(RDBlock) {
 
       let color;
       if ($(this).parent()[0].className === "RktVal") {
-        color = "green";
+        color = "#228b22";
       } else if ($(this).parent()[0].className === "RktRes") {
-        color = "blue";
+        color = "#0000af";
       } else if ($(this).parent()[0].className === "RktErr") {
         color = "red";
       } else {
