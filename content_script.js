@@ -2,52 +2,60 @@ console.log("========loading Rainbow Delimiters from content_script.js");
 console.log(jQuery().jquery);
 
 //// functions //////
+// const colors = [
+//   "#843c24",
+//   // "#458588",
+//   "#b16286",
+//   // "DarkSeaGreen",
+//   "IndianRed",
+//   // "DarkOrchid",
+//   "#FF1493",
+//   // "SteelBlue",
+//   // "OliveDrab",
+//   "darkred",
+//   // "#4c516d",
+//   "#7e5e60"
+//   // "#666699",
+//   // "#4a646c",
+//   // "#5e644f"
+// ]
+// const colors = [
+//   "darkred",
+//   "#b16286",
+//   "IndianRed",
+//   "#7e5e60",
+//   "#FF1493"
+// ]
 const colors = [
-  "#b16286",
-  "#458588",
-  "DarkSeaGreen",
+  "DarkRed",
   "IndianRed",
-  "DarkOrchid",
-
-  "#FF1493",
-  "SteelBlue",
-  "OliveDrab",
-  "darkred",
-
-  "#4c516d",
-  "#7e5e60",
-  "#666699",
-  "#4a646c",
-  "#5e644f",
-
-  "#b16286",
-  "#458588",
-  "DarkSeaGreen",
-  "IndianRed",
-  "DarkOrchid",
-
-  "#FF1493",
-  "SteelBlue",
-  "OliveDrab",
-  "darkred",
-
-  "#4c516d",
-  "#7e5e60",
-  "#666699",
-  "#4a646c",
-  "#5e644f"
+  "DarkSalmon",
+  "LightSalmon",
+  "#FF1493"
 ]
 
-const RDBlocks = [
-  // "blockquote", // racket scribble doc
-  // ".SCodeFlow", // racket scribble doc / frog scribble post
-  "table tbody tr",
-  ".highlight", // github (viewing code files, code comment of issues, readme of repo)
-  "code" // gitlab stackoverflow
-  // "table.d-block", // github code comment of issues
-  // "pre.code.highlight",
-  // "pre code"
-]
+
+const RDBlocks = [];
+if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.*)/)) {
+  RDBlocks.push(".SCodeFlow");  // ".SCodeFlow RktPn"
+} else if (location.href.match(/github\.com/)) {
+  RDBlocks.push(".highlight");
+} else if (location.href.match(/gitlab\.com/)) {
+  RDBlocks.push("code");
+} else {
+  RDBlocks.push("table tbody tr");
+}
+
+// const RDBlocks = [
+//   // "blockquote" // racket scribble doc
+//   // ".SCodeFlow RktPn" // racket scribble doc / frog scribble post
+//   "table tbody tr"
+//   ".highlight", // github (viewing code files, code comment of issues, readme of repo)
+//   "code" // gitlab stackoverflow
+//   // "table.d-block", // github code comment of issues
+//   // "pre.code.highlight",
+//   // "pre code"
+// ]
 
 
 function getRandomStr() {
@@ -70,7 +78,6 @@ function colorizing(RDBlock) {
     if (this.classList.contains("rd-colorized")) { return false; }
     if ($(this).find("span.rd-bracket").length) { return false; }
     // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
-
     this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
       return `<span class='rd-bracket'>${str}</span>`;
     });
@@ -83,8 +90,19 @@ function colorizing(RDBlock) {
   $(RDBlock).find("span.rd-bracket").each(function(i) {
     if (this.className.includes("rd-id-")) { return false; }
     if (recordDepth == 0) { randomId = getRandomStr(); }
+
     if (["(", "[", "{"].includes(this.textContent)) {
-      var color = colors[recordDepth % colors.length];
+      let color;
+      if ($(this).parent()[0].className === "RktVal") {
+        color = "green";
+      } else if ($(this).parent()[0].className === "RktRes") {
+        color = "blue";
+      } else if ($(this).parent()[0].className === "RktErr") {
+        color = "red";
+      } else {
+        color = colors[recordDepth % colors.length];
+      };
+
       var idd = getRandomStr(); randomIdds.push(idd);
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomId}`);
@@ -94,9 +112,21 @@ function colorizing(RDBlock) {
       recordDepth++;
       // $(this).css("font-weight", "bolder");
     }
+
     if ([")", "]", "}"].includes(this.textContent)) {
       recordDepth--;
-      var color = colors[recordDepth % colors.length];
+
+      let color;
+      if ($(this).parent()[0].className === "RktVal") {
+        color = "green";
+      } else if ($(this).parent()[0].className === "RktRes") {
+        color = "blue";
+      } else if ($(this).parent()[0].className === "RktErr") {
+        color = "red";
+      } else {
+        color = colors[recordDepth % colors.length];
+      };
+
       var idd = randomIdds.pop();
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomId}`);
