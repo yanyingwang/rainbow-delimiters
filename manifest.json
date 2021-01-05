@@ -31,7 +31,10 @@
                    "file:///Users/*/*/doc/*",
                    "https://github.com/*",
                    "https://gitlab.com/*",
-                   "https://stackoverflow.com/*" ]
+                   "https://stackoverflow.com/*",
+                   "https://www.rubydoc.info/*",
+                   "https://sequel.jeremyevans.net/rdoc/*"
+                    ]
     }
   ],
   "manifest_version": 2

@@ -3,22 +3,22 @@ console.log(jQuery().jquery);
 
 //// functions //////
 // const colors = [
-//   "#843c24",
-//   // "#458588",
+//   "#458588",
 //   "#b16286",
-//   // "DarkSeaGreen",
+//   "DarkSeaGreen",
 //   "IndianRed",
-//   // "DarkOrchid",
+//   "DarkOrchid",
 //   "#FF1493",
-//   // "SteelBlue",
-//   // "OliveDrab",
+//   "SteelBlue",
+//   "OliveDrab",
 //   "darkred",
-//   // "#4c516d",
-//   "#7e5e60"
-//   // "#666699",
-//   // "#4a646c",
-//   // "#5e644f"
+//   "#4c516d",
+//   "#7e5e60",
+//   "#666699",
+//   "#4a646c",
+//   "#5e644f"
 // ]
+
 // const colors = [
 //   "darkred",
 //   "#b16286",
@@ -26,10 +26,13 @@ console.log(jQuery().jquery);
 //   "#7e5e60",
 //   "#FF1493"
 // ]
+
 const colors = [
   "DarkRed",
-  "#b16286",
+  "firebrick",
   "IndianRed",
+  "LightCoral",
+  "Salmon",
   "DarkSalmon",
   "LightSalmon"
 ]
@@ -44,6 +47,8 @@ if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.
   RDBlocks.push("code");
 } else {
   RDBlocks.push("table tbody tr");
+  RDBlocks.push("pre");
+  RDBlocks.push("code");
 }
 
 // const RDBlocks = [
@@ -77,7 +82,7 @@ function colorizing(RDBlock) {
   $(RDBlock).each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
     if ($(this).find("span.rd-bracket").length) { return false; }
-    // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
+    if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
     this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
       return `<span class='rd-bracket'>${str}</span>`;
     });
