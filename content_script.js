@@ -82,10 +82,13 @@ function colorizing(RDBlock) {
   $(RDBlock).each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
     if ($(this).find("span.rd-bracket").length) { return false; }
-    if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
-    //TODO: this.innerHTML = this.innerHTML.replace(/<span class="RktPn">(\(|\)|\[|\]|\{|\})<\/span>/g, function(str) {  let bracket = str.match(/(\(|\)|\[|\]|\{|\})/); return `<span class='RktPn rd-bracket'>${str}</span>`; });
-    this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
-      return `<span class='rd-bracket'>${str}</span>`;
+    // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
+    $(this).find("span").each(function(i) {
+      if (this.innerText.match(/(\(|\)|\[|\]|\{|\})/g)) {
+        this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
+          return `<span class='rd-bracket'>${str}</span>`;
+        });
+      }
     });
     $(this).addClass("rd-colorized");
   })

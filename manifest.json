@@ -1,6 +1,6 @@
 {
   "name": "Rainbow Delimiters",
-  "version": "1.4",
+  "version": "1.5",
   "description": "A web browser plugin to colorize the matched brackets of source code on HTML pages",
   // "permissions": ["declarativeContent", "storage"],
   // "background": {
