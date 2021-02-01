@@ -38,9 +38,12 @@ const colors = [
 ]
 
 
+
+
 const RDBlocks = [];
 if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.*)/)) {
   RDBlocks.push(".SCodeFlow");  // ".SCodeFlow RktPn"
+  RDBlocks.push("blockquote.SVInsetFlow");
 } else if (location.href.match(/github\.com/)) {
   RDBlocks.push(".highlight");
 } else if (location.href.match(/gitlab\.com/)) {
