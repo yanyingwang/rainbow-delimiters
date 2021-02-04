@@ -206,7 +206,7 @@ handler = function main() {
     [ brotherElms, cousinElms ] = findClosestElms(this);
     brotherElms.css("color", "white");
     brotherElms.css("background", color);
-    cousinElms.css("background", "gainsboro");  // whitesmoke
+    cousinElms.css("background", "#E0E0E0");  // whitesmoke gainsboro
   });
 
   $("span.rd-bracket").mouseleave(function(i) {
