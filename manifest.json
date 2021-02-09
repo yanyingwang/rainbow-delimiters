@@ -1,20 +1,37 @@
 {
   "name": "Rainbow Delimiters",
+  "author": "Yanying Wang",
   "version": "1.7",
-  "description": "A web browser plugin to colorize the matched brackets of source code on HTML pages",
-  // "permissions": ["declarativeContent", "storage"],
+  "homepage_url": "https://github.com/yanyingwang/rainbow-delimiters",
+  "description": "a web browser plugin to colorize the matched brackets of source code on html pages",
+  // "permissions": ["declarativecontent", "storage"],
   // "background": {
-  //   "scripts": ["background.js"],
+  //   "page": "background-page.html",
+  //   "scripts": ["background-script.js"],
   //   "persistent": false
   // },
+  // "storage": {
+  //   "managed_schema": "schema.json"
+  // },
   "page_action": {
-    "default_popup": "popup.html",
+    "browser_style": true,
+    "default_title": "Rainbow Delimiters",
+    // "default_popup": "popup.html",
     "default_icon": {
       "16": "images/icon-16.png",
       "32": "images/icon-32.png",
       "48": "images/icon-48.png",
       "128": "images/icon-128.png"
-    }
+    },
+    "show_matches": [ "https://docs.racket-lang.org/*",
+                      "file:///Applications/Racket%20v*/*",
+                      "file:///Users/*/*/docs/*",
+                      "https://github.com/*",
+                      "https://gitlab.com/*",
+                      "https://stackoverflow.com/*",
+                      "https://www.rubydoc.info/*",
+                      "https://sequel.jeremyevans.net/rdoc/*"
+                    ]
   },
   "icons": {
     "16": "images/icon-16.png",
