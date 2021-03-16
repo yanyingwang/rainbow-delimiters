@@ -1,7 +1,7 @@
 # Rainbow Delimiters
 <strong>A web browser plugin to colorize the matched brackets of source code on HTML pages</strong>, it is especially useful for viewing source code of a Lisp-family dialect language.
 
-Because of its trying to be analogous of Emacs's [rainbow-delimiters-mode](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwil_rqGhdTsAhVBBKYKHZTSAtAQFjACegQIBRAC&url=https%3A%2F%2Fwww.emacswiki.org%2Femacs%2FRainbowDelimiters&usg=AOvVaw3znaXBk8GEjEjPYg0t1VIZ) in some way, this package is straightly named "Rainbow Delimiters".
+Because of its trying to be analogous of Emacs's [rainbow-delimiters-mode](https://www.emacswiki.org/emacs/RainbowDelimiters) in some way, this package is straightly named "Rainbow Delimiters".
 
 Mostly You would notice that this plugin is very useful as you are going through a code file of one repo from a website like github.com or checking a piece of source code of someone's answer from stackoverflow.com.
 
