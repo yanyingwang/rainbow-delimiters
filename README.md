@@ -12,7 +12,7 @@
 
 
 # appearance when this plugin is administering:
-![github-com-racket-lang](https://raw.githubusercontent.com/yanyingwang/rainbow-delimiters/main/screenshot/github-com.gif)
+![github-com-racket-lang](https://raw.githubusercontent.com/yanyingwang/rainbow-delimiters/master/screenshot/github-com.gif)
 
 
 # Explaination
