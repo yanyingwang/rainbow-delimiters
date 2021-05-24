@@ -1,1 +1,13 @@
 rainbow-delimiters.zip
+broswer/rainbow-delimiters.zip
+
+*.rkt~
+*.rkt#*
+.#*.rkt
+
+compiled/
+racket/doc/
+racket/docs/
+scribblings/compiled/
+
+
