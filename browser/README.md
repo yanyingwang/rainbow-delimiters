@@ -10,8 +10,8 @@ Mostly You would notice that this plugin is very useful as you are going through
 2. Firefox: Directly click [this link](https://addons.mozilla.org/zh-CN/firefox/addon/rainbow-delimiters) and install it.
 
 
-# appearance when this plugin was administered:
-![github-com-racket-lang](https://raw.githubusercontent.com/yanyingwang/rainbow-delimiters/main/screenshot/github-com.gif)
+# appearance when this plugin is administering:
+![github-com-racket-lang](https://raw.githubusercontent.com/yanyingwang/rainbow-delimiters/master/browser/screenshot/github-com.gif)
 
 
 # Explaination
