@@ -119,6 +119,8 @@ function colorizing(RDBlock) {
         color = "#228b22";
       } else if ($(this).parent()[0].className === "RktRes") {
         color = "#0000af";
+      } else if ($(this).parent()[0].className === "RktOpt") {
+        color = "black";
       } else if ($(this).parent()[0].className === "RktErr") {
         color = "red";
       } else {
