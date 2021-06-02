@@ -27,16 +27,50 @@ console.log(jQuery().jquery);
 //   "#FF1493"
 // ]
 
-const colors = [
-  "DarkRed",
-  "firebrick",
-  "IndianRed",
-  "LightCoral",
-  "Salmon",
-  "DarkSalmon",
-  "LightSalmon"
-]
+// https://flaviocopes.com/rgb-color-codes/
+// const colors = [
+//   "DarkRed",
+//   "firebrick",
+//   "crimson",
+//   "red",
+//   "tomato",
+//   "coral",
+//   "IndianRed",
+//   "LightCoral",
+//   "DarkSalmon",
+//   "Salmon",
+//   "LightSalmon",
+//   "orangeRed",
+//   "DarkOrange",
+//   "orange",
+//   "gold"
+// ]
 
+
+// https://www.color-hex.com/color/ff0000
+const colors = [
+// "#000000",
+// "#190000",
+  // "#330000",
+  // "#4c0000",
+  "#660000",
+  "#7f0000",
+  "#990000",
+  "#b20000",
+  // "#cc0000",
+  // "#e50000",
+  // "#ff0000", ======================= RED color
+  // "#ff1919",
+  // "#ff3232",
+  // "#ff4c4c",
+  "#ff6666",
+  "#ff7f7f",
+  "#ff9999",
+  "#ffb2b2",
+  "#ffcccc",
+  "#ffe5e5"
+  // "#ffffff"
+]
 
 
 
