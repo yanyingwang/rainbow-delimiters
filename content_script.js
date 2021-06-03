@@ -1,79 +1,53 @@
 console.log("========loading Rainbow Delimiters from content_script.js");
 console.log(jQuery().jquery);
 
-//// functions //////
-// const colors = [
-//   "#458588",
-//   "#b16286",
-//   "DarkSeaGreen",
-//   "IndianRed",
-//   "DarkOrchid",
-//   "#FF1493",
-//   "SteelBlue",
-//   "OliveDrab",
-//   "darkred",
-//   "#4c516d",
-//   "#7e5e60",
-//   "#666699",
-//   "#4a646c",
-//   "#5e644f"
-// ]
-
-// const colors = [
-//   "darkred",
-//   "#b16286",
-//   "IndianRed",
-//   "#7e5e60",
-//   "#FF1493"
-// ]
-
-// https://flaviocopes.com/rgb-color-codes/
-// const colors = [
-//   "DarkRed",
-//   "firebrick",
-//   "crimson",
-//   "red",
-//   "tomato",
-//   "coral",
-//   "IndianRed",
-//   "LightCoral",
-//   "DarkSalmon",
-//   "Salmon",
-//   "LightSalmon",
-//   "orangeRed",
-//   "DarkOrange",
-//   "orange",
-//   "gold"
-// ]
-
-
-// https://www.color-hex.com/color/ff0000
 const colors = [
-// "#000000",
-// "#190000",
-  // "#330000",
+  //   "#458588",
+  //   "#b16286",
+  //   "DarkSeaGreen",
+  //   "IndianRed",
+  //   "DarkOrchid",
+  //   "#FF1493",
+  //   "SteelBlue",
+  //   "OliveDrab",
+  //   "darkred",
+  //   "#4c516d",
+  //   "#7e5e60",
+  //   "#666699",
+  //   "#4a646c",
+  //   "#5e644f"
+
+  //// https://flaviocopes.com/rgb-color-codes/
+  // "DarkRed",
+  // "firebrick",
+  // "crimson",
+  // "red",
+  // "tomato",
+  // "coral",
+  // "IndianRed",
+  // "LightCoral",
+  // "DarkSalmon",
+  // "Salmon",
+  // "LightSalmon",
+  // "orangeRed",
+  // "DarkOrange",
+  // "orange",
+  // "gold"
+
+  // https://www.color-hex.com/color/ff0000
+  // "#350000",
   // "#4c0000",
+  // "#470000",
+  // "#580000",
   "#660000",
-  "#7f0000",
   "#990000",
-  "#b20000",
-  // "#cc0000",
-  // "#e50000",
-  // "#ff0000", ======================= RED color
-  // "#ff1919",
-  // "#ff3232",
-  // "#ff4c4c",
-  "#ff6666",
-  "#ff7f7f",
-  "#ff9999",
-  "#ffb2b2",
-  "#ffcccc",
-  "#ffe5e5"
-  // "#ffffff"
+  "#6b0000",
+  "#7c0000",
+  "#580000",
+  "#7f0000"
 ]
 
-
-
+//// functions //////
 const RDBlocks = [];
 if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.*)/)) {
   RDBlocks.push(".SCodeFlow");  // ".SCodeFlow RktPn"
