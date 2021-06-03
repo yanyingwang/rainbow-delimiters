@@ -17,16 +17,29 @@ const colors = [
     // "#4a646c",
     // "#5e644f"
 
-  // https://flaviocopes.com/rgb-color-codes/
-  "IndianRed",
-  "DarkOrange",
-  "DarkKhaki",
-  "YellowGreen",
-  "MediumAquaMarine",
-  "SteelBlue",
-  "MediumPurple",
-  "LightPink",
-  "peru"
+  //// https://flaviocopes.com/rgb-color-codes/
+  /// Light
+  // "IndianRed",
+  // "DarkOrange",
+  // "DarkKhaki",
+  // "YellowGreen",
+  // "MediumAquaMarine",
+  // "SteelBlue",
+  // "MediumPurple",
+  // "LightPink",
+  // "peru"
+
+  /// Dark
+  "DarkRed",
+  "DarkGoldenRod",
+  "DarkOliveGreen",
+  "DarkSlateGray",
+  "MidnightBlue",
+  "DarkSlateBlue",
+  "SaddleBrown",
+  "DarkMagenta",
+  "RosyBrown"
+
 
   // "firebrick",
   // "DarkGoldenRod",
@@ -54,7 +67,7 @@ const colors = [
   // "orange",
   // "gold"
 
-  // https://www.color-hex.com/color/ff0000
+  //// https://www.color-hex.com/color/ff0000
   // "#350000",
   // "#4c0000",
   // "#470000",
