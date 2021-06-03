@@ -2,22 +2,42 @@ console.log("========loading Rainbow Delimiters from content_script.js");
 console.log(jQuery().jquery);
 
 const colors = [
-  //   "#458588",
-  //   "#b16286",
-  //   "DarkSeaGreen",
-  //   "IndianRed",
-  //   "DarkOrchid",
-  //   "#FF1493",
-  //   "SteelBlue",
-  //   "OliveDrab",
-  //   "darkred",
-  //   "#4c516d",
-  //   "#7e5e60",
-  //   "#666699",
-  //   "#4a646c",
-  //   "#5e644f"
+    // "#458588",
+    // "#b16286",
+    // "DarkSeaGreen",
+    // "IndianRed",
+    // "DarkOrchid",
+    // "#FF1493",
+    // "SteelBlue",
+    // "OliveDrab",
+    // "darkred",
+    // "#4c516d",
+    // "#7e5e60",
+    // "#666699",
+    // "#4a646c",
+    // "#5e644f"
 
-  //// https://flaviocopes.com/rgb-color-codes/
+  // https://flaviocopes.com/rgb-color-codes/
+  "IndianRed",
+  "DarkOrange",
+  "DarkKhaki",
+  "YellowGreen",
+  "MediumAquaMarine",
+  "SteelBlue",
+  "MediumPurple",
+  "LightPink",
+  "peru"
+
+  // "firebrick",
+  // "DarkGoldenRod",
+  // "Olive",
+  // "DarkSlateGray",
+  // "CadetBlue",
+  // "indigo",
+  // "SaddleBrown",
+  // "RosyBrown",
+  // "SlateGray"
+
   // "DarkRed",
   // "firebrick",
   // "crimson",
@@ -39,12 +59,12 @@ const colors = [
   // "#4c0000",
   // "#470000",
   // "#580000",
-  "#660000",
-  "#990000",
-  "#6b0000",
-  "#7c0000",
-  "#580000",
-  "#7f0000"
+  // "#660000",
+  // "#990000",
+  // "#6b0000",
+  // "#7c0000",
+  // "#580000",
+  // "#7f0000"
 ]
 
 //// functions //////
