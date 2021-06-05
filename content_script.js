@@ -2,44 +2,47 @@ console.log("========loading Rainbow Delimiters from content_script.js");
 console.log(jQuery().jquery);
 
 const colors = [
-    // "#458588",
-    // "#b16286",
-    // "DarkSeaGreen",
-    // "IndianRed",
-    // "DarkOrchid",
-    // "#FF1493",
-    // "SteelBlue",
-    // "OliveDrab",
-    // "darkred",
-    // "#4c516d",
-    // "#7e5e60",
-    // "#666699",
-    // "#4a646c",
-    // "#5e644f"
+  // "#458588",
+  // "#b16286",
+  // "DarkSeaGreen",
+  // "IndianRed",
+  // "DarkOrchid",
+  // "#FF1493",
+  // "SteelBlue",
+  // "OliveDrab",
+  // "darkred",
+  // "#4c516d",
+  // "#7e5e60",
+  // "#666699",
+  // "#4a646c",
+  // "#5e644f"
 
   //// https://flaviocopes.com/rgb-color-codes/
   /// Light
-  // "IndianRed",
-  // "DarkOrange",
-  // "DarkKhaki",
-  // "YellowGreen",
-  // "MediumAquaMarine",
-  // "SteelBlue",
-  // "MediumPurple",
-  // "LightPink",
-  // "peru"
+  "LightSalmon",
+  "gold",
+  "DarkKhaki",
+  "GreenYellow",
+  "DarkSeaGreen",
+  "turquoise",
+  "LightBlue",
+  "thistle",
+  "violet",
+  "wheat",
+  "tan",
+  "LightSteelBlue",
+  "lavender"
 
   /// Dark
-  "DarkRed",
-  "DarkGoldenRod",
-  "DarkOliveGreen",
-  "DarkSlateGray",
-  "MidnightBlue",
-  "DarkSlateBlue",
-  "SaddleBrown",
-  "DarkMagenta",
-  "RosyBrown"
-
+  // "DarkRed",
+  // "DarkGoldenRod",
+  // "DarkOliveGreen",
+  // "DarkSlateGray",
+  // "MidnightBlue",
+  // "DarkSlateBlue",
+  // "SaddleBrown",
+  // "DarkMagenta",
+  // "RosyBrown"
 
   // "firebrick",
   // "DarkGoldenRod",
