@@ -15,7 +15,7 @@
 ![github-com-racket-lang](https://raw.githubusercontent.com/yanyingwang/rainbow-delimiters/master/screenshot/github-com.gif)
 
 
-# Explaination
+# Explanation
 Currently, this plugin will only be automatically enabled for links of websites below:
 1. `https://docs.racket-lang.org/*`
 2. `file:///Applications/Racket v*/*` (<= when you view racket doc with `raco doc` cmd.)
@@ -33,7 +33,7 @@ Currently, this plugin will only be automatically enabled for links of websites 
 - [ ] 7. support https://*.wikipedia.org/** pre div
 
 
-# dev build for publishing to a browser plugin
+# dev building to publish browser plugin
 ~~~shell
 zip -r -FS ../rainbow-delimiters.zip * --exclude '*.git*' '.*' '*__MACOSX/*' 'images-back*'  'LICENSE' 'screenshot/*' '*.DS_Store'
 tar -czvf rainbow-delimiters.tar.gz rainbow-delimiters
