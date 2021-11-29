@@ -1,7 +1,7 @@
 {
   "name": "Rainbow Delimiters",
   "author": "Yanying Wang",
-  "version": "1.9",
+  "version": "2.0",
   "homepage_url": "https://github.com/yanyingwang/rainbow-delimiters",
   "description": "a web browser plugin to colorize the matched brackets of source code on html pages",
   // "permissions": ["declarativecontent", "storage"],
