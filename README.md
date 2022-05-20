@@ -36,5 +36,5 @@ Currently, this plugin will only be automatically enabled for links of websites 
 # dev building to publish browser plugin
 ~~~shell
 zip -r -FS ../rainbow-delimiters.zip * --exclude '*.git*' '.*' '*__MACOSX/*' 'images-back*'  'LICENSE' 'screenshot/*' '*.DS_Store'
-tar -czvf rainbow-delimiters.tar.gz rainbow-delimiters
+cd .. && tar -czvf rainbow-delimiters.tar.gz rainbow-delimiters
 ~~~
