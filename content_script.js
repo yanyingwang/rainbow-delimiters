@@ -85,7 +85,7 @@ const colors = [
 
 //// functions //////
 const RDBlocks = [];
-if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.*)/)) {
+if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.*|file:\/\/\/.*racket.*doc)/)) {
   RDBlocks.push(".SCodeFlow");  // ".SCodeFlow RktPn"
   RDBlocks.push("blockquote.SVInsetFlow");
 } else if (location.href.match(/github\.com/)) {
