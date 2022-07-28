@@ -32,7 +32,8 @@
                       "https://stackoverflow.com/*",
                       "https://www.rubydoc.info/*",
                       "https://sequel.jeremyevans.net/rdoc/*",
-                      "https://*.wikipedia.org/*"
+                      "https://*.wikipedia.org/*",
+                      "https://racket.discourse.group/*"
                     ]
   },
   "icons": {
@@ -54,7 +55,8 @@
                    "https://stackoverflow.com/*",
                    "https://www.rubydoc.info/*",
                    "https://sequel.jeremyevans.net/rdoc/*",
-                   "https://*.wikipedia.org/*"
+                   "https://*.wikipedia.org/*",
+                   "https://racket.discourse.group/*"
                     ]
     }
   ],
