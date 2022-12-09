@@ -150,9 +150,9 @@ function colorizing(RDBlock) {
     $(this).addClass("rd-colorized");
   })
 
-  var recordDepth = 0;
-  var randomId;
-  var randomIdds = [];
+  let recordDepth = 0;
+  let randomId;
+  let randomIdds = [];
   $(RDBlock).find("span.rd-bracket").each(function(i) {
     if (this.className.includes("rd-id-")) { return false; }
     if (recordDepth == 0) { randomId = getRandomStr(); }
@@ -171,7 +171,7 @@ function colorizing(RDBlock) {
         color = colors[recordDepth % colors.length];
       };
 
-      var idd = getRandomStr(); randomIdds.push(idd);
+      let idd = getRandomStr(); randomIdds.push(idd);
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomId}`);
       this.classList.add(`rd-idd-${idd}`);
@@ -195,7 +195,7 @@ function colorizing(RDBlock) {
         color = colors[recordDepth % colors.length];
       };
 
-      var idd = randomIdds.pop();
+      let idd = randomIdds.pop();
       $(this).css("color", color);
       this.classList.add(`rd-id-${randomId}`);
       this.classList.add(`rd-idd-${idd}`);
@@ -206,8 +206,8 @@ function colorizing(RDBlock) {
 }
 
 function findClosestElms(elm) {
-  var matchingStr = elm.textContent;
-  var matchingArr;
+  let matchingStr = elm.textContent;
+  let matchingArr;
   switch(matchingStr) {
   case '(':
   case ')':
@@ -223,16 +223,16 @@ function findClosestElms(elm) {
     break;
   }
 
-  var classNames = elm.className.split(" ");
-  var rdDepth = classNames.find(function(e) { return e.startsWith("rd-depth-") });
-  var depthNum = rdDepth.split("-").pop();
-  var rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
-  var rdIdd = classNames.find(function(e) { return e.startsWith("rd-idd-") });
-  var parentElm = elm.closest(".rd-colorized").parentElement;
-  var cousinElms = $(parentElm).find(`span.${rdDepth}.${rdId}`).not(`span.${rdIdd}`).filter(function(ii) {
+  let classNames = elm.className.split(" ");
+  let rdDepth = classNames.find(function(e) { return e.startsWith("rd-depth-") });
+  let depthNum = rdDepth.split("-").pop();
+  let rdId = classNames.find(function(e) { return e.startsWith("rd-id-") });
+  let rdIdd = classNames.find(function(e) { return e.startsWith("rd-idd-") });
+  let parentElm = elm.closest(".rd-colorized").parentElement;
+  let cousinElms = $(parentElm).find(`span.${rdDepth}.${rdId}`).not(`span.${rdIdd}`).filter(function(ii) {
     return matchingArr.includes(this.textContent);
   });
-  var brotherElms = $(parentElm).find(`span.${rdDepth}.${rdId}.${rdIdd}`).filter(function(ii) {
+  let brotherElms = $(parentElm).find(`span.${rdDepth}.${rdId}.${rdIdd}`).filter(function(ii) {
     return matchingArr.includes(this.textContent);
   });
   return [ brotherElms, cousinElms ];
@@ -246,7 +246,7 @@ function initRD() {
 
   $("span.rd-bracket").mouseover(function(i) {
     console.log(this.classList);
-    var color = rgb2hex(this.style.color);
+    let color = rgb2hex(this.style.color);
     if (color == "white") { return false };
     if (!color.length) { return console.log(`mouseover on an unexpected rd-bracket element: ${this.outerHTML}`); }
     [ brotherElms, cousinElms ] = findClosestElms(this);
@@ -256,7 +256,7 @@ function initRD() {
   });
 
   $("span.rd-bracket").mouseleave(function(i) {
-    var color = rgb2hex(this.style.backgroundColor);
+    let color = rgb2hex(this.style.backgroundColor);
     if (color == "transparent") { return false };
     if (!color.length) { return console.log(`mouseleave on an unexpected rd-bracket element: ${this.outerHTML}`); }
     [ brotherElms, cousinElms ] = findClosestElms(this);
@@ -266,39 +266,8 @@ function initRD() {
   });
 }
 
-// Highlight Jumping
-function hashHJ() {
-  debugger;
-  oldURL = new URL(event.oldURL);
-  newURL = new URL(event.newURL);
-  oldHash = oldURL.hash.substring(1);
-  newHash = newURL.hash.substring(1);
-  oldHashDecoded = decodeURIComponent(oldHash);
-  newHashDecoded = decodeURIComponent(newHash);
-  console.log(`hashHJ detected: ${oldHashDecoded} => ${newHashDecoded}`);
-  if (!!oldHashDecoded) {
-      document.getElementsByName(oldHashDecoded)[0].parentElement.style.background = "transparent"
-  }
-  if (!!newHashDecoded) {
-    document.getElementsByName(newHashDecoded)[0].parentElement.style.background = "yellow"
-  }
 
-}
-
-function onloadHJ() {
-  const urlhashstr = decodeURIComponent(location.hash.substring(1));
-  console.log(`onloadHJ detected: ${urlhashstr}`);
-  if (!!urlhashstr) {
-    document.getElementsByName(urlhashstr)[0].parentElement.style.background = "yellow"
-  }
-}
-
-
-window.onload = (event) => {
+$(document).ready(function() {  // not working for a vuejs website
   initRD();
-  onloadHJ();
-};
-
-window.onhashchange = (event) => {
-  hashHJ();
-};
+});
+$(document).on('pjax:end', initRD); // this line is mainly for github.com/*
