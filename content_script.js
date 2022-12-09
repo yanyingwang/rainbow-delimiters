@@ -131,7 +131,7 @@ function colorizing(RDBlock) {
   $(RDBlock).each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
     if ($(this).find("span.rd-bracket").length) { return false; }
-    if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
+    // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
     //TODO: this.innerHTML = this.innerHTML.replace(/<span class="RktPn">(\(|\)|\[|\]|\{|\})<\/span>/g, function(str) {  let bracket = str.match(/(\(|\)|\[|\]|\{|\})/); return `<span class='RktPn rd-bracket'>${str}</span>`; });
     if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.*)/)) {
       $(this).find("span").each(function(i) {
@@ -239,7 +239,7 @@ function findClosestElms(elm) {
 }
 
 /////// actions /////////
-handler = function main() {
+function initRD() {
   RDBlocks.forEach(function(e) {
     if ($(e).length) { colorizing(e); }
   });
@@ -266,6 +266,39 @@ handler = function main() {
   });
 }
 
-// $( handler );
-$(document).ready(function() { $( handler ); }); // not working for a vuejs website
-$(document).on('pjax:end', handler); // this line is mainly for github.com/*
+// Highlight Jumping
+function hashHJ() {
+  debugger;
+  oldURL = new URL(event.oldURL);
+  newURL = new URL(event.newURL);
+  oldHash = oldURL.hash.substring(1);
+  newHash = newURL.hash.substring(1);
+  oldHashDecoded = decodeURIComponent(oldHash);
+  newHashDecoded = decodeURIComponent(newHash);
+  console.log(`hashHJ detected: ${oldHashDecoded} => ${newHashDecoded}`);
+  if (!!oldHashDecoded) {
+      document.getElementsByName(oldHashDecoded)[0].parentElement.style.background = "transparent"
+  }
+  if (!!newHashDecoded) {
+    document.getElementsByName(newHashDecoded)[0].parentElement.style.background = "yellow"
+  }
+
+}
+
+function onloadHJ() {
+  const urlhashstr = decodeURIComponent(location.hash.substring(1));
+  console.log(`onloadHJ detected: ${urlhashstr}`);
+  if (!!urlhashstr) {
+    document.getElementsByName(urlhashstr)[0].parentElement.style.background = "yellow"
+  }
+}
+
+
+window.onload = (event) => {
+  initRD();
+  onloadHJ();
+};
+
+window.onhashchange = (event) => {
+  hashHJ();
+};
