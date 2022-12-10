@@ -1,5 +1,30 @@
-console.log("========loading Rainbow Delimiters from content_script.js");
+console.log("======== loading Rainbow Delimiters ...");
 console.log(jQuery().jquery);
+
+function getRandomStr() {
+  return Math.floor(Math.random() * 10000).toString();
+}
+function hex(x) {
+  return ("0" + parseInt(x).toString(16)).slice(-2);
+}
+function rgb2hex(str) {
+  rgb = str.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  if (rgb === null) {
+    return str;
+  } else {
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+  }
+}
+
+function isRacketDoc() {
+  return !!(location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.*|file:\/\/\/.*racket.*doc)/))
+}
+function isGithubCom() {
+  return !!(location.href.match(/github\.com/))
+}
+function isGitlabCom() {
+  return !!(location.href.match(/gitlab\.com/))
+}
 
 const colors = [
   // "#458588",
@@ -83,21 +108,20 @@ const colors = [
   // "#7f0000"
 ]
 
-//// functions //////
+
 const RDBlocks = [];
-if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.*|file:\/\/\/.*racket.*doc)/)) {
+if isRacketDoc() {
   RDBlocks.push(".SCodeFlow");  // ".SCodeFlow RktPn"
   RDBlocks.push("blockquote.SVInsetFlow");
-} else if (location.href.match(/github\.com/)) {
+} else if isGithubCom() {
   RDBlocks.push(".highlight");
-} else if (location.href.match(/gitlab\.com/)) {
+} else if isGitlabCom {
   RDBlocks.push("code");
 } else {
   RDBlocks.push("table tbody tr");
   RDBlocks.push("pre");
   RDBlocks.push("code");
 }
-
 // const RDBlocks = [
 //   // "blockquote" // racket scribble doc
 //   // ".SCodeFlow RktPn" // racket scribble doc / frog scribble post
@@ -110,31 +134,14 @@ if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.
 // ]
 
 
-function getRandomStr() {
-  return Math.floor(Math.random() * 10000).toString();
-}
-function hex(x) {
-  return ("0" + parseInt(x).toString(16)).slice(-2);
-}
-function rgb2hex(str) {
-  rgb = str.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-  if (rgb === null) {
-    return str;
-  } else {
-    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-  }
-}
-
-
-
 function colorizing(RDBlock) {
   $(RDBlock).each(function(i) {
     if (this.classList.contains("rd-colorized")) { return false; }
     if ($(this).find("span.rd-bracket").length) { return false; }
     // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
     //TODO: this.innerHTML = this.innerHTML.replace(/<span class="RktPn">(\(|\)|\[|\]|\{|\})<\/span>/g, function(str) {  let bracket = str.match(/(\(|\)|\[|\]|\{|\})/); return `<span class='RktPn rd-bracket'>${str}</span>`; });
-    if (location.href.match(/(docs\.racket-lang\.org|file:\/\/\/.*\/Racket.*\/doc\/.*)/)) {
-      $(this).find("span").each(function(i) {
+    if isRacketDoc() {
+      $(this).find("span.RktPn").each(function(i) {
         if (this.innerText.match(/(\(|\)|\[|\]|\{|\})/g)) {
           this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
             return `<span class='rd-bracket'>${str}</span>`;
