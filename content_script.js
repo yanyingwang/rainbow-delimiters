@@ -110,12 +110,12 @@ const colors = [
 
 
 const RDBlocks = [];
-if isRacketDoc() {
+if (isRacketDoc()) {
   RDBlocks.push(".SCodeFlow");  // ".SCodeFlow RktPn"
   RDBlocks.push("blockquote.SVInsetFlow");
-} else if isGithubCom() {
+} else if (isGithubCom()) {
   RDBlocks.push(".highlight");
-} else if isGitlabCom {
+} else if (isGitlabCom()) {
   RDBlocks.push("code");
 } else {
   RDBlocks.push("table tbody tr");
@@ -140,7 +140,7 @@ function colorizing(RDBlock) {
     if ($(this).find("span.rd-bracket").length) { return false; }
     // if (this.innerHTML.match(/(\(|\)|\[|\]|\{|\})/)) { debugger; }
     //TODO: this.innerHTML = this.innerHTML.replace(/<span class="RktPn">(\(|\)|\[|\]|\{|\})<\/span>/g, function(str) {  let bracket = str.match(/(\(|\)|\[|\]|\{|\})/); return `<span class='RktPn rd-bracket'>${str}</span>`; });
-    if isRacketDoc() {
+    if (isRacketDoc()) {
       $(this).find("span.RktPn").each(function(i) {
         if (this.innerText.match(/(\(|\)|\[|\]|\{|\})/g)) {
           this.innerHTML = this.innerHTML.replace(/(\(|\)|\[|\]|\{|\})/g, function(str) {
